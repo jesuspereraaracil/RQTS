@@ -1,0 +1,25 @@
+{
+  "name": "rqts",
+  "version": "1.0.0",
+  "description": "Rx Queue in TypeScript",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesuspereraaracil/RQTS.git"
+  },
+  "keywords": [
+    "rx",
+    "typescript",
+    "reactive",
+    "queue"
+  ],
+  "author": "jesuspereraaracil",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/jesuspereraaracil/RQTS/issues"
+  },
+  "homepage": "https://github.com/jesuspereraaracil/RQTS#readme"
+}
