@@ -1,5 +1,5 @@
 {
-  "name": "rqts",
+  "name": "@jpereraaracil/rqts",
   "version": "1.0.0",
   "description": "Rx Queue in TypeScript",
   "main": "lib/index.ts",
