@@ -3,7 +3,7 @@ import {type RQTSEvent, type Topic} from './RQTSEvent';
 import {v4 as uuidv4} from 'uuid';
 
 export class RQTSEventManager {
-	public static getInstance(): RQTSEventManager {
+	public static getInstance(): RQTSEventManager{
 		if (!RQTSEventManager.instance) {
 			RQTSEventManager.instance = new RQTSEventManager();
 		}

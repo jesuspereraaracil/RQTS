@@ -1,8 +1,8 @@
 {
   "name": "@jpereraaracil/rqts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Rx Queue in TypeScript",
-  "main": "lib/index.ts",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "eslint --config .eslintrc.js --fix ./src ",
     "build:tsc": "tsc",
