@@ -8,5 +8,17 @@
 </head>
 <body>
 <h1>RQTS - Rx Queue in TypeScript</h1>
+
+<code lang="typescript">
+    import { RQTSEventManager } from "@jpereraaracil/rqts/lib";
+
+    const rqts = RQTSEventManager.getInstance();
+
+    const loggerSub = rqts.subscribeAll(ev => console.log(ev.data));
+
+    rqts.publish({ topic: 'TOPIC_NA;E', data: { name: 'This is a random name' } });
+
+    rqts.unsubscribe(loggerSub);
+</code>
 </body>
 </html>
