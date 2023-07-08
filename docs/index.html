@@ -10,15 +10,15 @@
 <h1>RQTS - Rx Queue in TypeScript</h1>
 
 <code lang="typescript">
-    import { RQTSEventManager } from "@jpereraaracil/rqts/lib";
-
-    const rqts = RQTSEventManager.getInstance();
-
-    const loggerSub = rqts.subscribeAll(ev => console.log(ev.data));
-
-    rqts.publish({ topic: 'TOPIC_NA;E', data: { name: 'This is a random name' } });
-
-    rqts.unsubscribe(loggerSub);
+    import { RQTSEventManager } from "@jpereraaracil/rqts/lib";<br>
+    <br>
+    const rqts = RQTSEventManager.getInstance();<br>
+    <br>
+    const loggerSub = rqts.subscribeAll(ev => console.log(ev.data));<br>
+    <br>
+    rqts.publish({ topic: 'TOPIC_NAME', data: { name: 'This is a random name' } });<br>
+    <br>
+    rqts.unsubscribe(loggerSub);<br>
 </code>
 </body>
 </html>
