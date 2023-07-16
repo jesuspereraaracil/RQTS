@@ -2,21 +2,43 @@ import {filter, ReplaySubject, type Subject, type Subscription} from 'rxjs';
 import {type RQTSEvent, type Topic} from './RQTSEvent';
 import {v4 as uuidv4} from 'uuid';
 
-export class RQTSEventManager {
-	public static getInstance(): RQTSEventManager {
-		if (!RQTSEventManager.instance) {
-			RQTSEventManager.instance = new RQTSEventManager();
+export class RQTSTubeManager {
+	public static getInstance(): RQTSTubeManager {
+		if (!RQTSTubeManager.instance) {
+			RQTSTubeManager.instance = new RQTSTubeManager();
 		}
 
-		return RQTSEventManager.instance;
+		return RQTSTubeManager.instance;
 	}
 
-	private static instance: RQTSEventManager;
+	private static instance: RQTSTubeManager;
 
+	private readonly tubes: Map<string, RQTSEventManager>;
+
+	private constructor() {
+		this.tubes = new Map<string, RQTSEventManager>();
+	}
+
+	public getTube(tubeName: string): RQTSEventManager {
+		let tube = this.tubes.get(tubeName);
+		if (!tube) {
+			tube = new RQTSEventManager();
+			this.tubes.set(tubeName, tube);
+		}
+
+		return tube;
+	}
+
+	public deleteTube(tubeName: string): void {
+		this.tubes.delete(tubeName);
+	}
+}
+
+class RQTSEventManager {
 	private readonly tube: Subject<RQTSEvent>;
 	private readonly subscriptions: Map<string, Subscription>;
 
-	private constructor() {
+	constructor() {
 		this.tube = new ReplaySubject<RQTSEvent>(5, 5000);
 		this.subscriptions = new Map<string, Subscription>();
 	}
