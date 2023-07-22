@@ -1,6 +1,6 @@
 {
   "name": "@jpereraaracil/rqts",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Rx Queue in TypeScript",
   "main": "lib/index.js",
   "scripts": {
