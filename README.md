@@ -22,4 +22,4 @@ logger.subscribeAll((event) => console.log('Event received:', event));
 
 // Only subscribe to some topics
 logger.subscribeTo(EVENT_ERROR, (event) => console.log('ERROR:', event));
-``
+```
