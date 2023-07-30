@@ -1,71 +1,68 @@
-import {filter, ReplaySubject, type Subject, type Subscription} from 'rxjs';
-import {type RQTSEvent, type Topic} from './RQTSEvent';
-import {v4 as uuidv4} from 'uuid';
+import { filter, ReplaySubject, type Subject, type Subscription } from 'rxjs'
+import { type RQTSEvent, type Topic } from './RQTSEvent'
+import { v4 as uuidv4 } from 'uuid'
 
 export class RQTSTubeManager {
-	public static getInstance(): RQTSTubeManager {
-		if (!RQTSTubeManager.instance) {
-			RQTSTubeManager.instance = new RQTSTubeManager();
-		}
+  private static instance: RQTSTubeManager
+  private readonly tubes: Map<string, RQTSEventManager>
 
-		return RQTSTubeManager.instance;
-	}
+  private constructor () {
+    this.tubes = new Map<string, RQTSEventManager>()
+  }
 
-	private static instance: RQTSTubeManager;
+  public static getInstance (): RQTSTubeManager {
+    if (RQTSTubeManager.instance === undefined) {
+      RQTSTubeManager.instance = new RQTSTubeManager()
+    }
 
-	private readonly tubes: Map<string, RQTSEventManager>;
+    return RQTSTubeManager.instance
+  }
 
-	private constructor() {
-		this.tubes = new Map<string, RQTSEventManager>();
-	}
+  public getTube (tubeName: string): RQTSEventManager {
+    let tube = this.tubes.get(tubeName)
+    if (tube == null) {
+      tube = new RQTSEventManager()
+      this.tubes.set(tubeName, tube)
+    }
 
-	public getTube(tubeName: string): RQTSEventManager {
-		let tube = this.tubes.get(tubeName);
-		if (!tube) {
-			tube = new RQTSEventManager();
-			this.tubes.set(tubeName, tube);
-		}
+    return tube
+  }
 
-		return tube;
-	}
-
-	public deleteTube(tubeName: string): void {
-		this.tubes.delete(tubeName);
-	}
+  public deleteTube (tubeName: string): void {
+    this.tubes.delete(tubeName)
+  }
 }
 
 class RQTSEventManager {
-	private readonly tube: Subject<RQTSEvent>;
-	private readonly subscriptions: Map<string, Subscription>;
+  private readonly tube: Subject<RQTSEvent<any>>
+  private readonly subscriptions: Map<string, Subscription>
 
-	constructor() {
-		this.tube = new ReplaySubject<RQTSEvent>(5, 5000);
-		this.subscriptions = new Map<string, Subscription>();
-	}
+  constructor () {
+    this.tube = new ReplaySubject<RQTSEvent<any>>(5, 5000)
+    this.subscriptions = new Map<string, Subscription>()
+  }
 
-	public publish(event: RQTSEvent): void {
-		this.tube.next(event);
-	}
+  public publish<T>(event: RQTSEvent<T>): void {
+    this.tube.next(event)
+  }
 
-	public subscribeAll(next: (event: RQTSEvent) => void) {
-		const subscriptionId = uuidv4();
-		const subscription = this.tube.subscribe({next});
-		this.subscriptions.set(subscriptionId, subscription);
-		return subscriptionId;
-	}
+  public subscribeAll<T>(next: (event: RQTSEvent<T>) => void): string {
+    const subscriptionId = uuidv4()
+    const subscription = this.tube.subscribe({ next })
+    this.subscriptions.set(subscriptionId, subscription)
+    return subscriptionId
+  }
 
-	public subscribeTo(topic: Topic, next: (event: RQTSEvent) => void) {
-		const subscriptionId = uuidv4();
-		const subscription = this.tube.pipe(
-			filter(ev => ev.topic === topic),
-		).subscribe({next});
-		this.subscriptions.set(subscriptionId, subscription);
-		return subscriptionId;
-	}
+  public subscribeTo<T>(topic: Topic, next: (event: RQTSEvent<T>) => void): string {
+    const subscriptionId = uuidv4()
+    const subscription = this.tube.pipe(filter(ev => ev.topic === topic)).subscribe({ next })
+    this.subscriptions.set(subscriptionId, subscription)
+    return subscriptionId
+  }
 
-	public unsubscribe(subscriptionId: string) {
-		const subscription = this.subscriptions.get(subscriptionId);
-		subscription?.unsubscribe();
-		this.subscriptions.delete(subscriptionId);
-	}
+  public unsubscribe (subscriptionId: string): void {
+    const subscription = this.subscriptions.get(subscriptionId)
+    subscription?.unsubscribe()
+    this.subscriptions.delete(subscriptionId)
+  }
 }
