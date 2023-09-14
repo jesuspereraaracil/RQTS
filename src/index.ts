@@ -1,2 +1,2 @@
-import { RQTSTubeManager } from './EventManager/RQTSEventManager';
-export { RQTSTubeManager };
+import { RQTSTubeManager } from './EventManager/RQTSEventManager'
+export { RQTSTubeManager }
