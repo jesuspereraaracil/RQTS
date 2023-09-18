@@ -1,6 +1,6 @@
-import { filter, ReplaySubject, type Subject, type Subscription } from 'rxjs'
 import { type RQTSEvent, type Topic } from './RQTSEvent'
 import { v4 as uuidv4 } from 'uuid'
+import {filter, ReplaySubject, Subject, Subscription} from "rxjs";
 
 export class RQTSTubeManager {
   private static instance: RQTSTubeManager
