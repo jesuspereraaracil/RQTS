@@ -1,25 +1,22 @@
 const path = require('path')
 
 module.exports = {
-  mode: 'production',
-  entry: './src/index.ts',
+  devtool: 'source-map',
+  entry: {
+    bundle: './build/index.js',
+  },
   output: {
-    filename: 'index.js',
-    globalObject: 'this',
-    library: {
-      type: 'commonjs'
-    },
     path: path.resolve(__dirname, 'lib')
   },
   externals: {
     "rxjs": "rxjs"
   },
   resolve: {
-    extensions: ['.ts']
+    extensions: ['.js']
   },
   module: {
     rules: [{
-      test: /\.ts$/,
+      test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader'
     }]
