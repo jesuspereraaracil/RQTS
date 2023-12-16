@@ -14,7 +14,7 @@
     "prebuild": "bun run clean",
     "build": "bun run build:tsc && bun run build:webpack && bun run cleanBuild",
     "test": "jest",
-    "install": "bun run build"
+    "prepare": "bun run build"
   },
   "repository": {
     "type": "git",
