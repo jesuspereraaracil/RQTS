@@ -1,5 +1,5 @@
-import {createRQTSEvent, RQTSEvent, type Topic} from './RQTSEvent'
-import { RQTSManager } from '../lib'
+import { createRQTSEvent, type RQTSEvent, type Topic } from './RQTSEvent'
+import { RQTSManager } from './RQTSManager'
 
 const DEFAULT_TUBE = 'DEFAULT_TUBE'
 
