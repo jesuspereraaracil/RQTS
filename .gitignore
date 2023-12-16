@@ -131,4 +131,5 @@ dist
 
 lib/**/*
 lib/
+build/
 .idea/
