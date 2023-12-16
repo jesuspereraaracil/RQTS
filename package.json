@@ -5,17 +5,16 @@
   "main": "lib/bundle.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "clean": "rm -rf lib && bun run cleanBuild",
+    "clean": "rm -rf lib",
     "cleanBuild": "rm -rf build",
     "lint": "eslint --config .eslintrc.js --fix ./src ",
     "build:tsc": "tsc",
     "build:webpack": "webpack --mode production --config webpack.config.js",
     "build:webpack:dev": "webpack --mode development --config webpack.config.js",
-    "prebuild": "bun run clean",
+    "prebuild": "bun run clean && bun run cleanBuild",
     "build": "bun run build:tsc && bun run build:webpack && bun run cleanBuild",
     "test": "jest",
-    "postinstall": "bun run build",
-    "prepublishOnly": "bun run build"
+    "prepublish": "bun run build"
   },
   "repository": {
     "type": "git",
