@@ -9,10 +9,8 @@
     "cleanBuild": "rm -rf build",
     "lint": "eslint --config .eslintrc.js --fix ./src ",
     "build:tsc": "tsc",
-    "build:webpack": "webpack --mode production --config webpack.config.js",
-    "build:webpack:dev": "webpack --mode development --config webpack.config.js",
     "prebuild": "bun run clean && bun run cleanBuild",
-    "build": "bun run build:tsc && bun run build:webpack && bun run cleanBuild",
+    "build": "bun run build:tsc && bun run cleanBuild",
     "test": "jest",
     "prepublish": "bun run build"
   },
