@@ -12,7 +12,7 @@ module.exports = {
     "rxjs": "rxjs"
   },
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js', '.ts']
   },
   module: {
     rules: [{
