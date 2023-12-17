@@ -29,9 +29,9 @@ export class RQTSTubeManager {
     return subscriptionId
   }
 
-  public unsubscribe (subscriptionId: string): void {
+  public unsubscribe (subscriptionId: string): boolean {
     const subscription = this.subscriptions.get(subscriptionId)
     subscription?.unsubscribe()
-    this.subscriptions.delete(subscriptionId)
+    return this.subscriptions.delete(subscriptionId)
   }
 }

@@ -2,18 +2,20 @@
   "name": "@jpereraaracil/rqts",
   "version": "7.5.4",
   "description": "Rx Queue in TypeScript",
-  "main": "lib/bundle.js",
+  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "clean": "rm -rf lib",
-    "cleanBuild": "rm -rf build",
-    "lint": "eslint --config .eslintrc.js --fix ./src ",
-    "build:tsc": "tsc",
-    "prebuild": "bun run clean && bun run cleanBuild",
-    "build": "bun run build:tsc && bun run cleanBuild",
-    "test": "jest",
-    "prepublish": "bun run build"
+    "lint": "eslint --config .eslintrc.js --fix ./src/**/*.ts",
+    "build:bun": "bun build src/index.ts --outfile ./lib/index.js --minify",
+    "build:tsc": "tsc --emitDeclarationOnly",
+    "prebuild": "bun run clean",
+    "build": "bun run build:bun && bun run build:tsc",
+    "test": "bun test"
   },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jesuspereraaracil/RQTS.git"
@@ -53,7 +55,6 @@
     "eslint-plugin-n": "^16.4.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "jest": "^29.7.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.3.3"
   }
