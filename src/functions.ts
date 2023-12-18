@@ -8,9 +8,9 @@ export const emit = <T>(topic: Topic, data?: T): void => {
   RQTSManager.getTubeByName(DEFAULT_TUBE).publish(event)
 }
 
-export const receive = <T>(topic: Topic, handler: (data: T | undefined) => void): string => {
+export const receive = <T>(topic: Topic, handler: (data: T | undefined) => Promise<void>): string => {
   const onEvent = (event: RQTSEvent<T>): void => {
-    handler(event.data)
+    void handler(event.data)
   }
   return RQTSManager.getTubeByName(DEFAULT_TUBE).subscribeTo<T>(topic, onEvent)
 }
