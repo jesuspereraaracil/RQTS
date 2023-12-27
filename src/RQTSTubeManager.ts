@@ -1,13 +1,13 @@
 import { type RQTSEvent, type Topic } from './RQTSEvent'
-import { v4 as uuidv4 } from 'uuid'
-import { filter, ReplaySubject, type Subject, type Subscription } from 'rxjs'
+import { v4 } from 'uuid'
+import { filter, Subject, type Subscription } from 'rxjs'
 
 export class RQTSTubeManager {
   private readonly tube: Subject<RQTSEvent<any>>
   private readonly subscriptions: Map<string, Subscription>
 
   constructor () {
-    this.tube = new ReplaySubject<RQTSEvent<any>>(5, 5000)
+    this.tube = new Subject<RQTSEvent<any>>()
     this.subscriptions = new Map<string, Subscription>()
   }
 
@@ -16,14 +16,14 @@ export class RQTSTubeManager {
   }
 
   public subscribeAll<T>(next: (event: RQTSEvent<T>) => void): string {
-    const subscriptionId = uuidv4()
+    const subscriptionId = v4()
     const subscription = this.tube.subscribe({ next })
     this.subscriptions.set(subscriptionId, subscription)
     return subscriptionId
   }
 
   public subscribeTo<T>(topic: Topic, next: (event: RQTSEvent<T>) => void): string {
-    const subscriptionId = uuidv4()
+    const subscriptionId = v4()
     const subscription = this.tube.pipe(filter(ev => ev.topic === topic)).subscribe({ next })
     this.subscriptions.set(subscriptionId, subscription)
     return subscriptionId
