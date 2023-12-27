@@ -29,8 +29,4 @@ export class RQTSManager {
   public static getTubeByName (tubeName: string): RQTSTubeManager {
     return RQTSManager.getInstance().getTube(tubeName)
   }
-
-  public deleteTube (tubeName: string): void {
-    this.tubes.delete(tubeName)
-  }
 }
