@@ -1,6 +1,6 @@
 {
   "name": "@jpereraaracil/rqts",
-  "version": "7.7.0",
+  "version": "7.7.1",
   "description": "Rx Queue in TypeScript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
