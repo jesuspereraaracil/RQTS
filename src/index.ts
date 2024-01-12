@@ -1,1 +1,1 @@
-export { emit, receive, receiveAll, unsubscribe } from './functions'
+export { emit, receive, receiveAll, receiveFirst, unsubscribe } from './functions'
