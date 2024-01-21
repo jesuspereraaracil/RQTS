@@ -6,7 +6,17 @@ export class RQTSTubeManager {
   private readonly tube: Subject<RQTSEvent<any>>
   private readonly subscriptions: Map<string, Subscription>
 
-  constructor () {
+  private static instance: RQTSTubeManager
+
+  public static getInstance (): RQTSTubeManager {
+    if (RQTSTubeManager.instance === undefined) {
+      RQTSTubeManager.instance = new RQTSTubeManager()
+    }
+
+    return RQTSTubeManager.instance
+  }
+
+  private constructor () {
     this.tube = new Subject<RQTSEvent<any>>()
     this.subscriptions = new Map<string, Subscription>()
   }

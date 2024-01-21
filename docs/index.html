@@ -11,10 +11,12 @@
 
 <code lang="typescript">
     import { emit, receive } from '@jpereraaracil/rqts';
-    <br>
-    receive('MY_TOPIC', { data: 1 })
-    <br>
-    emit('MY_TOPIC', (event) => console.log(event));
+    <br />
+    const TOPIC = 'MY_TOPIC'
+    <br />
+    receive(TOPIC, (event) => console.log(event) )
+    <br />
+    emit(TOPIC, { data: 1 });
 </code>
 </body>
 </html>

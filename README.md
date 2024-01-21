@@ -6,7 +6,9 @@ Rx Queue in TypeScript
 ```typescript
 import { emit, receive } from '@jpereraaracil/rqts';
 
-receive('MY_TOPIC', { data: 1 })
+const TOPIC = 'MY_TOPIC'
 
-emit('MY_TOPIC', (event) => console.log(event));
+receive(TOPIC, (event) => console.log(event) )
+
+emit(TOPIC, { data: 1 });
 ```
